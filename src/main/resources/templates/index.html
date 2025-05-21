@@ -73,7 +73,11 @@
                 <img class="card-img-top" th:src="@{${auto.autoFoto}}" 
                      th:alt="${auto.marka + ' ' + auto.modeloa}">
                 <div class="card-body">
-                    <h5 class="card-title" th:text="${auto.marka + ' ' + auto.modeloa}"></h5>
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h5 class="card-title" th:text="${auto.marka + ' ' + auto.modeloa}"></h5>
+                        <span class="badge badge-info" th:text="${#lists.size(auto.matxurak)} + ' averías'"></span>
+                    </div>
+                    <p class="card-text"></p>
                     <a th:href="@{/auto/{id}(id=${auto.id})}" class="btn btn-primary">Saber más</a>
                 </div>
             </div>
