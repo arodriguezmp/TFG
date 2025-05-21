@@ -16,6 +16,7 @@ public class Auto {
 
     private String marka;
     private String modeloa;
+    private String autoFoto; 
 
     @OneToMany(mappedBy = "auto", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Matxura> matxurak;

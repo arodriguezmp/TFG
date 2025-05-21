@@ -1,10 +1,14 @@
 package com.DatuAtzipena2425Proiektua.app.repository;
 
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.DatuAtzipena2425Proiektua.app.domain.Auto;
 
 @Repository
-public interface AutoRepository {
-    Iterable<Auto> saveAll(Iterable<Auto> entities);
+public interface AutoRepository extends JpaRepository<Auto, Long> {
+    List<Auto> findAll();
+    
 }
