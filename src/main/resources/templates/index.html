@@ -6,33 +6,7 @@
     <title>Autoak</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #939597;
-            padding: 20px;
-        }
-        .carousel-item img {
-            height: 500px;
-            width: auto;
-            object-fit: cover;
-            margin: 0 auto;
-            display: block;
-        }
-        .carousel-item {
-            background-color: #939597;
-        }
-        .card {
-            margin-bottom: 20px;
-            height: 100%;
-        }
-        .card-img-top {
-            height: 200px;
-            object-fit: cover;
-        }
-        .card-body {
-            background-color: #f8f9fa;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -50,7 +24,7 @@
                     th:src="@{${auto.autoFoto}}" 
                     th:alt="${auto.marka + ' ' + auto.modeloa}">
                 <div class="carousel-caption d-none d-md-block">
-                    <h5 th:text="${auto.marka + ' ' + auto.modeloa}"></h5>
+                    <h5 class="carousel-text" th:text="${auto.marka + ' ' + auto.modeloa}"></h5>
                 </div>
             </div>
         </div>
@@ -64,7 +38,7 @@
         </a>
     </div>
 
-
+    <nav th:replace="fragments/navbar :: navbar"></nav>
 
     <div class="container">
     <div class="row">
@@ -75,10 +49,10 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-start">
                         <h5 class="card-title" th:text="${auto.marka + ' ' + auto.modeloa}"></h5>
-                        <span class="badge badge-info" th:text="${#lists.size(auto.matxurak)} + ' averías'"></span>
+                        <span class="badge badge-custom" th:text="${#lists.size(auto.matxurak)} + ' averías'"></span>
                     </div>
                     <p class="card-text"></p>
-                    <a th:href="@{/auto/{id}(id=${auto.id})}" class="btn btn-primary">Saber más</a>
+                    <a th:href="@{/auto/{id}(id=${auto.id})}" class="btn btn-custom">Saber más</a>
                 </div>
             </div>
         </div>

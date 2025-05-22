@@ -1,18 +1,15 @@
 <div th:fragment="navbar">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg">
         <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/}">Erabiltzaileak</a>
+                <li class="nav-item" th:classappend="${activePage == 'home'} ? 'active'">
+                    <a class="nav-link" th:href="@{/}">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/juegos}">Jokoak</a>
+                <li class="nav-item" th:classappend="${activePage == 'autos'} ? 'active'">
+                    <a class="nav-link" th:href="@{/autos}">Autos</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/carrito}">Carrito</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/compra}">Compras</a>
+                <li class="nav-item" th:classappend="${activePage == 'averias'} ? 'active'">
+                    <a class="nav-link" th:href="@{/averias}">Averias</a>
                 </li>
             </ul>
         </div>

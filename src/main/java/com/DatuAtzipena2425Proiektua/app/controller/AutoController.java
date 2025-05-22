@@ -20,7 +20,7 @@ public class AutoController {
     
     @Autowired
     private AutoRepository autoRepository;
-    
+
     @Autowired
     private MatxuraRepository matxuraRepository;
     
@@ -35,6 +35,7 @@ public class AutoController {
         
         model.addAttribute("carouselAutos", carouselAutos);
         model.addAttribute("cardAutos", cardAutos);
+         model.addAttribute("activePage", "home");
         return "index";
     }
 
@@ -67,5 +68,19 @@ public class AutoController {
         }
         
         return result;
+    }
+
+    @GetMapping("/autos")
+    public String autos(Model model) {
+        List<Auto> allAutos = autoRepository.findAll();
+        model.addAttribute("autos", allAutos);
+        model.addAttribute("activePage", "autos");
+        return "autos";
+    }
+
+    @GetMapping("/averias")
+    public String averias(Model model) {
+        model.addAttribute("activePage", "averias");
+        return "averias";
     }
 }
