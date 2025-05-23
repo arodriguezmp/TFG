@@ -70,17 +70,17 @@ public class AutoController {
         return result;
     }
 
-    @GetMapping("/autos")
+    @GetMapping("/autoak")
     public String autos(Model model) {
-        List<Auto> allAutos = autoRepository.findAll();
-        model.addAttribute("autos", allAutos);
-        model.addAttribute("activePage", "autos");
+        List<Auto> allAutoak = autoRepository.findAll();
+        model.addAttribute("autos", allAutoak);
+        model.addAttribute("activePage", "autoak");
         return "autos";
     }
 
     @GetMapping("/averias")
     public String averias(Model model) {
-        model.addAttribute("activePage", "averias");
+        model.addAttribute("activePage", "matxura");
         return "averias";
     }
 }

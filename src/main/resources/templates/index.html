@@ -49,10 +49,10 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-start">
                         <h5 class="card-title" th:text="${auto.marka + ' ' + auto.modeloa}"></h5>
-                        <span class="badge badge-custom" th:text="${#lists.size(auto.matxurak)} + ' averías'"></span>
+                        <span class="badge badge-custom" th:text="'Matxurak: ' + ${#lists.size(auto.matxurak)}"></span>
                     </div>
                     <p class="card-text"></p>
-                    <a th:href="@{/auto/{id}(id=${auto.id})}" class="btn btn-custom">Saber más</a>
+                    <a th:href="@{/auto/{id}(id=${auto.id})}" class="btn btn-custom">Gehiago</a>
                 </div>
             </div>
         </div>

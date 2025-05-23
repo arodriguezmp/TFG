@@ -5,55 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalles del Auto</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #939597;
-            padding: 20px;
-        }
-        .card {
-            background-color: #f8f9fa;
-            margin-bottom: 20px;
-        }
-        .auto-image {
-            max-width: 100%;
-            height: auto;
-            margin-bottom: 20px;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/auto.css}">
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1 class="text-center mb-4" th:text="${auto.marka + ' ' + auto.modeloa}"></h1>
-                <img th:src="@{${auto.autoFoto}}" class="auto-image" th:alt="${auto.marka + ' ' + auto.modeloa}">
+    <div class="auto-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="auto-title" th:text="${auto.marka + ' ' + auto.modeloa}"></h1>
+                    <img th:src="@{${auto.autoFoto}}" class="auto-image" th:alt="${auto.marka + ' ' + auto.modeloa}">
+                </div>
             </div>
-        </div>
 
-        <h2 class="mt-4">Averías</h2>
-        <div class="row">
-            <div class="col-md-4 mb-4" th:each="matxura : ${auto.matxurak}">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Avería</h5>
-                        <p class="card-text" th:text="${matxura.deskribapena}"></p>
+            <h2 class="averias-title">Matxurak</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4" th:each="matxura : ${auto.matxurak}">
+                    <div class="card averia-card">
                         <div th:if="${matxura.fotoRuta}">
-                            <img th:src="@{${matxura.fotoRuta}}" class="img-fluid mb-2" alt="Foto de la avería">
+                            <img th:src="@{${matxura.fotoRuta}}" alt="Foto de la avería">
                         </div>
-                        <div th:if="${matxura.videoRuta}">
-                            <video th:src="@{${matxura.videoRuta}}" controls class="img-fluid">
-                                Tu navegador no soporta el elemento video.
-                            </video>
+                        <div class="card-body">
+                            <h5 class="card-title">Matxura</h5>
+                            <p class="card-text" th:text="${matxura.deskribapena}"></p>
+                            <div th:if="${matxura.videoRuta}">
+                                <video th:src="@{${matxura.videoRuta}}" controls>
+                                    Tu navegador no soporta el elemento video.
+                                </video>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            
+            <a href="/" class="btn btn-volver">Itzuli</a>
         </div>
-        
-        <a href="/" class="btn btn-primary mt-3">Volver</a>
     </div>
 
-    <!-- Bootstrap JS -->
+    <!-- Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
