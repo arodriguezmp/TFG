@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.DatuAtzipena2425Proiektua.app.repository.AutoRepository;
 import com.DatuAtzipena2425Proiektua.app.repository.MatxuraRepository;
@@ -71,9 +72,15 @@ public class AutoController {
     }
 
     @GetMapping("/autoak")
-    public String autos(Model model) {
-        List<Auto> allAutoak = autoRepository.findAll();
-        model.addAttribute("autos", allAutoak);
+    public String autos(Model model, @RequestParam(required = false) String search) {
+        List<Auto> autos;
+        if (search != null && !search.isEmpty()) {
+            autos = autoRepository.findByFullName(search);
+        } else {
+            autos = autoRepository.findAll();
+        }
+        model.addAttribute("autos", autos);
+        model.addAttribute("search", search);
         model.addAttribute("activePage", "autoak");
         return "autos";
     }

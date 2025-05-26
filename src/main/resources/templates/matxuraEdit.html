@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matxura Editatu</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+
+<body>
+    <nav th:replace="fragments/navbar :: navbar"></nav>
+
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">Matxura Editatu</h1>
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <form th:action="@{/matxura/update/{id}(id=${matxura.id})}" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="deskribapena">Deskribapena</label>
+                        <textarea class="form-control" id="deskribapena" name="deskribapena"
+                            th:text="${matxura.deskribapena}" rows="3"></textarea>
+                    </div>
+
+                    <!-- Mostrar foto actual si existe -->
+                    <div class="form-group" th:if="${matxura.fotoRuta}">
+                        <label>Oraingo Argazkia:</label>
+                        <img th:src="@{${matxura.fotoRuta}}" class="img-fluid mb-2" style="max-height: 200px;">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="photoFile">Argazki Berria</label>
+                        <input type="file" class="form-control-file" id="photoFile" name="photoFile" accept="image/*">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="videoRuta">YouTube Bideoa</label>
+                        <input type="text" class="form-control" id="videoRuta" name="videoRuta"
+                            th:value="${matxura.videoRuta}">
+                        <small class="form-text text-muted">Sartu YouTube bideoren URL-a edo ID-a</small>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-custom">Gorde</button>
+                        <a href="/matxurak" class="btn btn-secondary ml-2">Ezeztatu</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

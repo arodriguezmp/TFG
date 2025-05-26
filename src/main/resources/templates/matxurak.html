@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,26 +8,25 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
+
 <body>
     <nav th:replace="fragments/navbar :: navbar"></nav>
 
     <div class="container">
-        <h1 class="text-center mb-4">Matxura Guztiak</h1>
+        <h1 class="text-center mb-4 averias-title">Matxura Guztiak</h1>
         <div class="row">
             <div class="col-md-4 mb-4" th:each="matxura : ${matxurak}">
                 <div class="card">
                     <div th:if="${matxura.fotoRuta}">
-                        <img th:src="@{${matxura.fotoRuta}}" class="card-img-top" alt="Foto de la avería">
+                        <img th:src="@{${matxura.fotoRuta}(v=${param.t})}" class="card-img-top" alt="Foto de la avería">
                     </div>
                     <div class="card-body">
                         <h5 class="card-title" th:text="${matxura.auto.marka + ' ' + matxura.auto.modeloa}"></h5>
                         <p class="card-text" th:text="${matxura.deskribapena}"></p>
-                        <div th:if="${matxura.videoRuta}" class="mt-2">
-                            <video th:src="@{${matxura.videoRuta}}" controls class="w-100">
-                                Tu navegador no soporta el elemento video.
-                            </video>
+                        <div class="d-flex justify-content-between mt-2">
+                            <a th:href="@{/matxura/{id}(id=${matxura.id})}" class="btn btn-custom">Xehetasunak</a>
+                            <a th:href="@{/matxura/edit/{id}(id=${matxura.id})}" class="btn btn-warning">Editatu</a>
                         </div>
-                        <a th:href="@{/auto/{id}(id=${matxura.auto.id})}" class="btn btn-custom mt-2">Autoa ikusi</a>
                     </div>
                 </div>
             </div>
@@ -38,4 +38,5 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

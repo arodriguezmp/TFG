@@ -1,35 +1,30 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalles del Auto</title>
+    <title>Matxuraren Xehetasunak</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/auto.css}">
 </head>
-
 <body>
+    <nav th:replace="fragments/navbar :: navbar"></nav>
+    
     <div class="auto-container">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="auto-title" th:text="${auto.marka + ' ' + auto.modeloa}"></h1>
-                    <img th:src="@{${auto.autoFoto}}" class="auto-image" th:alt="${auto.marka + ' ' + auto.modeloa}">
-                </div>
-            </div>
-
-            <h2 class="averias-title">Matxurak</h2>
-            <div class="row">
-                <div class="col-md-4 mb-4" th:each="matxura : ${auto.matxurak}">
+                    <h1 class="auto-title" th:text="${matxura.auto.marka + ' ' + matxura.auto.modeloa}"></h1>
+                    
                     <div class="card averia-card">
                         <div th:if="${matxura.fotoRuta}">
-                            <img th:src="@{${matxura.fotoRuta}}" alt="Foto de la avería">
+                            <img th:src="@{${matxura.fotoRuta}(v=${param.t})}" class="auto-image" alt="Foto de la avería">
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">Matxura</h5>
+                            <h5 class="card-title">Matxuraren Deskribapena</h5>
                             <p class="card-text" th:text="${matxura.deskribapena}"></p>
-                            <div th:if="${matxura.videoRuta}">
+                            
+                            <div th:if="${matxura.videoRuta}" class="mt-4">
                                 <div class="embed-responsive embed-responsive-16by9">
                                     <iframe class="embed-responsive-item"
                                         th:src="@{'https://www.youtube.com/embed/' + ${matxura.videoRuta}}"
@@ -39,23 +34,23 @@
                                     </iframe>
                                 </div>
                             </div>
-                            <!-- Añadir botones de acción -->
-                            <div class="d-flex justify-content-between mt-3">
+                            
+                            <div class="d-flex justify-content-between mt-4">
+                                <a th:href="@{/auto/{id}(id=${matxura.auto.id})}" class="btn btn-custom">Autora joan</a>
                                 <a th:href="@{/matxura/edit/{id}(id=${matxura.id})}" class="btn btn-warning">Editatu</a>
                             </div>
                         </div>
                     </div>
+                    
+                    <a href="/matxurak" class="btn btn-volver mt-4">Itzuli</a>
                 </div>
             </div>
-
-            <a href="/" class="btn btn-volver">Itzuli</a>
         </div>
     </div>
 
-    <!-- Bootstrap JS and dependencies -->
+    <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-
 </html>

@@ -60,3 +60,35 @@ body {
     background-color: #f5df4d;
     color: black;
 }
+
+/* BUTTONS */
+
+
+.btn-warning {
+    background-color: #ffc107;
+    border-color: #ffc107;
+    color: #000;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+    border-color: #e0a800;
+    color: #000;
+}
+
+.form-control-file {
+    border: 1px solid #ced4da;
+    padding: 0.375rem;
+    border-radius: 0.25rem;
+}
+
+.form-control-file:focus {
+    border-color: #f5df4d;
+    box-shadow: 0 0 0 0.2rem rgba(245, 223, 77, 0.25);
+}
+
+.averias-title {
+    color: #f5df4d;
+    margin: 30px 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
