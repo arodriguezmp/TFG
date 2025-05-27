@@ -74,18 +74,18 @@ public class MatxuraController {
     public String createMatxura(@ModelAttribute Matxura matxura,
             @RequestParam("photoFile") MultipartFile photoFile,
             @RequestParam("autoId") Long autoId) {
-        // Establecer el auto asociado
+        // Autoa esleitu
         Auto auto = autoRepository.findById(autoId).orElse(null);
         if (auto != null) {
             matxura.setAuto(auto);
 
-            // Manejar la foto si se proporciona
+            // Argazkia kudeatu da ematen bada
             if (!photoFile.isEmpty()) {
                 String newPhotoPath = savePhoto(photoFile, MATXURA_UPLOAD_DIR, "/images/matxurak");
                 matxura.setFotoRuta(newPhotoPath);
             }
 
-            // Manejar el video si se proporciona
+            // Bideoa kudeatu ematen bada
             if (matxura.getVideoRuta() != null && !matxura.getVideoRuta().isEmpty()) {
                 String videoId = extractYoutubeId(matxura.getVideoRuta());
                 if (videoId != null && !videoId.isEmpty()) {
@@ -128,7 +128,7 @@ public class MatxuraController {
     public String deleteMatxura(@PathVariable Long id) {
         Matxura matxura = matxuraRepository.findById(id).orElse(null);
         if (matxura != null) {
-            // Eliminar la foto si existe
+            // Argazkia ezabatu existitzen bada
             if (matxura.getFotoRuta() != null) {
                 deleteExistingPhoto(matxura.getFotoRuta(), MATXURA_UPLOAD_DIR);
             }

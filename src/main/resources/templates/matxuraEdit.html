@@ -23,7 +23,7 @@
                     </h5>
                 </div>
 
-                <!-- Descripción -->
+                <!-- Deskripzioa -->
                 <div class="form-group">
                     <label for="deskribapena">Deskribapena</label>
                     <textarea class="form-control" id="deskribapena" name="deskribapena"
@@ -31,9 +31,9 @@
                 </div>
 
                 <div class="row">
-                    <!-- Columna izquierda: Foto -->
+                    <!-- Ezkerreko zutabea: Argazkia -->
                     <div class="col-md-6">
-                        <!-- Foto actual -->
+                        <!-- Oraingo argazkia -->
                         <div class="form-group" th:if="${matxura.fotoRuta}">
                             <label>Oraingo Argazkia:</label>
                             <div class="text-center mb-3">
@@ -42,7 +42,7 @@
                             </div>
                         </div>
 
-                        <!-- Nueva foto -->
+                        <!-- Argazki berria -->
                         <div class="form-group">
                             <label for="photoFile">Argazki Berria</label>
                             <input type="file" class="form-control-file" id="photoFile" name="photoFile"
@@ -51,9 +51,9 @@
                         </div>
                     </div>
 
-                    <!-- Columna derecha: Video -->
+                    <!-- Eskuineko zutabea: Bideoa -->
                     <div class="col-md-6">
-                        <!-- Video actual -->
+                        <!-- Oraingo bideoa -->
                         <div class="form-group" th:if="${matxura.videoRuta}">
                             <label>Oraingo Bideoa:</label>
                             <div class="embed-responsive embed-responsive-16by9 mb-3">
@@ -64,7 +64,7 @@
                             </div>
                         </div>
 
-                        <!-- Nuevo video -->
+                        <!-- Bideo berria -->
                         <div class="form-group">
                             <label for="videoRuta">YouTube Bideo Berria</label>
                             <input type="text" class="form-control" id="videoRuta" name="videoRuta"
@@ -74,7 +74,7 @@
                     </div>
                 </div>
 
-                <!-- Botones -->
+                <!-- Botoiak -->
                 <div class="text-center mt-4">
                     <button type="submit" class="btn btn-custom">Gorde</button>
                     <a href="/matxurak" class="btn btn-secondary ml-2">Ezeztatu</a>

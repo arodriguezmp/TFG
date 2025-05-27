@@ -38,8 +38,8 @@ public class AutoController {
     @GetMapping("/")
     public String index(Model model) {
         List<Auto> allAutos = autoRepository.findAll();
-        List<Auto> carouselAutos = getRandomAutos(allAutos, 3); // 3 autos para el carousel
-        List<Auto> cardAutos = getRandomAutos(allAutos, 6); // 6 autos para las cards
+        List<Auto> carouselAutos = getRandomAutos(allAutos, 3); // 3 auto CAROUSEL
+        List<Auto> cardAutos = getRandomAutos(allAutos, 6); // 6 auto CARDS
 
         List<Matxura> allMatxuras = matxuraRepository.findAll();
 
@@ -107,11 +107,11 @@ public class AutoController {
     public String deleteAuto(@PathVariable Long id) {
         Auto auto = autoRepository.findById(id).orElse(null);
         if (auto != null) {
-            // Eliminar la foto si existe
+            // Argazkia ezabatu existitzen bada
             if (auto.getAutoFoto() != null) {
                 deleteExistingPhoto(auto.getAutoFoto());
             }
-            // Las matxuras asociadas se eliminarán automáticamente por la relación cascade
+            // Erlazionatutako matxurak automatikoki ezabatuko dira cascade erlazioagatik
             autoRepository.deleteById(id);
         }
         return "redirect:/autoak";

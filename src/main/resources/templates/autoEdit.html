@@ -23,7 +23,7 @@
                                   method="post" 
                                   enctype="multipart/form-data">
                                 
-                                <!-- Marca -->
+                                <!-- Marka -->
                                 <div class="form-group">
                                     <label for="marka">Marka</label>
                                     <input type="text" class="form-control" 
@@ -31,7 +31,7 @@
                                            th:value="${auto.marka}" required>
                                 </div>
 
-                                <!-- Modelo -->
+                                <!-- Modeloa -->
                                 <div class="form-group">
                                     <label for="modeloa">Modeloa</label>
                                     <input type="text" class="form-control" 
@@ -39,7 +39,7 @@
                                            th:value="${auto.modeloa}" required>
                                 </div>
 
-                                <!-- Foto actual -->
+                                <!-- Oraingo argazkia -->
                                 <div class="form-group" th:if="${auto.autoFoto}">
                                     <label>Oraingo Argazkia:</label>
                                     <div class="text-center mb-3">
@@ -50,7 +50,7 @@
                                     </div>
                                 </div>
 
-                                <!-- Nueva foto -->
+                                <!-- Argazki berria -->
                                 <div class="form-group">
                                     <label for="photoFile">Argazki Berria</label>
                                     <input type="file" class="form-control-file" 
@@ -58,7 +58,7 @@
                                            accept="image/*">
                                 </div>
 
-                                <!-- Botones -->
+                                <!-- Botoiak -->
                                 <div class="text-center mt-4">
                                     <button type="submit" class="btn btn-custom">Gorde</button>
                                     <a href="/autoak" class="btn btn-secondary ml-2">Ezeztatu</a>
@@ -75,7 +75,7 @@
         </div>
     </div>
 
-    <!-- Modal de confirmación -->
+    <!-- Baieztapen modala -->
     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" 
          aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
