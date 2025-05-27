@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Editatu</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/matxuraEdit.css}">
+</head>
+<body>
+    <nav th:replace="fragments/navbar :: navbar"></nav>
+
+    <div class="auto-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    <h1 class="text-center mb-4 averias-title">Auto Editatu</h1>
+                    
+                    <div class="card">
+                        <div class="card-body">
+                            <form th:action="@{/auto/update/{id}(id=${auto.id})}" 
+                                  method="post" 
+                                  enctype="multipart/form-data">
+                                
+                                <!-- Marca -->
+                                <div class="form-group">
+                                    <label for="marka">Marka</label>
+                                    <input type="text" class="form-control" 
+                                           id="marka" name="marka" 
+                                           th:value="${auto.marka}" required>
+                                </div>
+
+                                <!-- Modelo -->
+                                <div class="form-group">
+                                    <label for="modeloa">Modeloa</label>
+                                    <input type="text" class="form-control" 
+                                           id="modeloa" name="modeloa" 
+                                           th:value="${auto.modeloa}" required>
+                                </div>
+
+                                <!-- Foto actual -->
+                                <div class="form-group" th:if="${auto.autoFoto}">
+                                    <label>Oraingo Argazkia:</label>
+                                    <div class="text-center mb-3">
+                                        <img th:src="@{${auto.autoFoto}(v=${param.t})}" 
+                                             class="img-fluid rounded" 
+                                             style="max-height: 300px;"
+                                             alt="Foto actual">
+                                    </div>
+                                </div>
+
+                                <!-- Nueva foto -->
+                                <div class="form-group">
+                                    <label for="photoFile">Argazki Berria</label>
+                                    <input type="file" class="form-control-file" 
+                                           id="photoFile" name="photoFile" 
+                                           accept="image/*">
+                                </div>
+
+                                <!-- Botones -->
+                                <div class="text-center mt-4">
+                                    <button type="submit" class="btn btn-custom">Gorde</button>
+                                    <a href="/autoak" class="btn btn-secondary ml-2">Ezeztatu</a>
+                                    <button type="button" class="btn btn-danger ml-2" 
+                                            data-toggle="modal" data-target="#deleteModal">
+                                        Ezabatu
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de confirmación -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" 
+         aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Autoa Ezabatu</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Ziur zaude auto hau ezabatu nahi duzula?</p>
+                    <p class="text-danger">Kontuan izan honen matxura guztiak ere ezabatuko direla.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Ezeztatu</button>
+                    <form th:action="@{/auto/delete/{id}(id=${auto.id})}" method="post" style="display: inline;">
+                        <button type="submit" class="btn btn-danger">Ezabatu</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

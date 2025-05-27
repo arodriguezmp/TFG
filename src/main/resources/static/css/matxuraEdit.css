@@ -102,3 +102,16 @@ label {
     background-color: #c82333;
     border-color: #bd2130;
 }
+
+select.form-control {
+    height: auto;
+    min-height: 50px;
+    padding: 0.75rem;
+    white-space: normal;
+    line-height: 1.5;
+}
+
+select.form-control option {
+    padding: 10px;
+    white-space: normal;
+}

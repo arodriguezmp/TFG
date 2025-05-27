@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,16 +9,21 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
+
 <body>
     <nav th:replace="fragments/navbar :: navbar"></nav>
 
     <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="averias-title mb-0">Auto Guztiak</h1>
+            <a href="/auto/new" class="btn btn-custom">Auto Berria +</a>
+        </div>
         <div class="row mb-4">
             <div class="col-md-6 mx-auto">
                 <form class="form-inline justify-content-center" action="/autoak" method="get">
                     <div class="input-group w-100">
-                        <input type="text" class="form-control" name="search" 
-                            th:value="${search}" placeholder="Bilatu marka edo modeloa...">
+                        <input type="text" class="form-control" name="search" th:value="${search}"
+                            placeholder="Bilatu marka edo modeloa...">
                         <div class="input-group-append">
                             <button class="btn btn-custom" type="submit">Bilatu</button>
                             <a href="/autoak" class="btn btn-secondary ml-2">Berrezarri</a>
@@ -36,15 +42,18 @@
         <div class="row">
             <div class="col-md-4 mb-4" th:each="auto : ${autos}">
                 <div class="card">
-                    <img class="card-img-top" th:src="@{${auto.autoFoto}}" 
-                         th:alt="${auto.marka + ' ' + auto.modeloa}">
+                    <img class="card-img-top" th:src="@{${auto.autoFoto}}" th:alt="${auto.marka + ' ' + auto.modeloa}">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-start">
                             <h5 class="card-title" th:text="${auto.marka + ' ' + auto.modeloa}"></h5>
-                            <span class="badge badge-custom" th:text="'Matxurak: ' + ${#lists.size(auto.matxurak)}"></span>
+                            <span class="badge badge-custom"
+                                th:text="'Matxurak: ' + ${#lists.size(auto.matxurak)}"></span>
                         </div>
                         <p class="card-text"></p>
-                        <a th:href="@{/auto/{id}(id=${auto.id})}" class="btn btn-custom">Gehiago</a>
+                        <div class="d-flex justify-content-between">
+                            <a th:href="@{/auto/{id}(id=${auto.id})}" class="btn btn-custom">Gehiago</a>
+                            <a th:href="@{/auto/edit/{id}(id=${auto.id})}" class="btn btn-warning">Editatu</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -56,4 +65,5 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

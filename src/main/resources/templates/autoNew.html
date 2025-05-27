@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Berria</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/matxuraEdit.css}">
+</head>
+<body>
+    <nav th:replace="fragments/navbar :: navbar"></nav>
+
+    <div class="auto-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    <h1 class="text-center mb-4 averias-title">Auto Berria</h1>
+                    
+                    <div class="card">
+                        <div class="card-body">
+                            <form th:action="@{/auto/new}" 
+                                  method="post" 
+                                  enctype="multipart/form-data">
+                                
+                                <!-- Marca -->
+                                <div class="form-group">
+                                    <label for="marka">Marka</label>
+                                    <input type="text" 
+                                           class="form-control" 
+                                           id="marka" 
+                                           name="marka"
+                                           required>
+                                </div>
+
+                                <!-- Modelo -->
+                                <div class="form-group">
+                                    <label for="modeloa">Modeloa</label>
+                                    <input type="text" 
+                                           class="form-control" 
+                                           id="modeloa" 
+                                           name="modeloa"
+                                           required>
+                                </div>
+
+                                <!-- Foto -->
+                                <div class="form-group">
+                                    <label for="photoFile">Argazkia</label>
+                                    <input type="file" 
+                                           class="form-control-file" 
+                                           id="photoFile" 
+                                           name="photoFile" 
+                                           accept="image/*" 
+                                           required>
+                                    <small class="form-text text-muted">Aukeratu argazkia igotzeko</small>
+                                </div>
+
+                                <!-- Botones -->
+                                <div class="text-center mt-4">
+                                    <button type="submit" class="btn btn-custom">Gorde</button>
+                                    <a href="/autoak" class="btn btn-secondary ml-2">Ezeztatu</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
