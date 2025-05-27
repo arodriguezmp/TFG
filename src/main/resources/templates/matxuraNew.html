@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matxura Berria</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/matxuraEdit.css}">
+</head>
+<body>
+    <nav th:replace="fragments/navbar :: navbar"></nav>
+
+    <div class="auto-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    <h1 class="text-center mb-4 averias-title">Matxura Berria</h1>
+                    
+                    <div class="card">
+                        <div class="card-body">
+                            <form th:action="@{/matxura/new}" method="post" enctype="multipart/form-data">
+                                <!-- Selección de Auto -->
+                                <div class="form-group">
+                                    <label for="autoId">Autoa</label>
+                                    <select class="form-control" id="autoId" name="autoId" required>
+                                        <option value="">Aukeratu auto bat</option>
+                                        <option th:each="auto : ${autos}" 
+                                                th:value="${auto.id}"
+                                                th:text="${auto.marka + ' ' + auto.modeloa}">
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <!-- Descripción -->
+                                <div class="form-group">
+                                    <label for="deskribapena">Deskribapena</label>
+                                    <textarea class="form-control" id="deskribapena" name="deskribapena" 
+                                            rows="3" required></textarea>
+                                </div>
+
+                                <div class="row">
+                                    <!-- Foto -->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="photoFile">Argazkia</label>
+                                            <input type="file" class="form-control-file" 
+                                                   id="photoFile" name="photoFile" accept="image/*">
+                                        </div>
+                                    </div>
+
+                                    <!-- Video -->
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="videoRuta">YouTube Bideoa</label>
+                                            <input type="text" class="form-control" 
+                                                   id="videoRuta" name="videoRuta">
+                                            <small class="form-text text-muted">Sartu YouTube bideoren URL-a</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Botones -->
+                                <div class="text-center mt-4">
+                                    <button type="submit" class="btn btn-custom">Gorde</button>
+                                    <a href="/matxurak" class="btn btn-secondary ml-2">Ezeztatu</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

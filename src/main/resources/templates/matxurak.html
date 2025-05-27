@@ -13,7 +13,10 @@
     <nav th:replace="fragments/navbar :: navbar"></nav>
 
     <div class="container">
-        <h1 class="text-center mb-4 averias-title">Matxura Guztiak</h1>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="averias-title mb-0">Matxura Guztiak</h1>
+            <a href="/matxura/new" class="btn btn-custom">Matxura Berria +</a>
+        </div>
         <div class="row">
             <div class="col-md-4 mb-4" th:each="matxura : ${matxurak}">
                 <div class="card">

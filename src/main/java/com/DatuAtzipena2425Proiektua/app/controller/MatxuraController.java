@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.DatuAtzipena2425Proiektua.app.domain.Auto;
 import com.DatuAtzipena2425Proiektua.app.domain.Matxura;
 import com.DatuAtzipena2425Proiektua.app.repository.AutoRepository;
 import com.DatuAtzipena2425Proiektua.app.repository.MatxuraRepository;
@@ -31,12 +32,22 @@ public class MatxuraController {
     @Autowired
     private MatxuraRepository matxuraRepository;
 
+    @Autowired
+    private AutoRepository autoRepository;
+
     @GetMapping("/matxurak")
     public String matxurak(Model model) {
         List<Matxura> allMatxurak = matxuraRepository.findAll();
         model.addAttribute("matxurak", allMatxurak);
         model.addAttribute("activePage", "matxurak");
         return "matxurak";
+    }
+
+    @GetMapping("/matxura/new")
+    public String newMatxuraForm(Model model) {
+        model.addAttribute("matxura", new Matxura());
+        model.addAttribute("autos", autoRepository.findAll());
+        return "matxuraNew";
     }
 
     @GetMapping("/matxura/{id}")
@@ -55,6 +66,73 @@ public class MatxuraController {
         if (matxura != null) {
             model.addAttribute("matxura", matxura);
             return "matxuraEdit";
+        }
+        return "redirect:/matxurak";
+    }
+
+    @PostMapping("/matxura/new")
+    public String createMatxura(@ModelAttribute Matxura matxura,
+            @RequestParam("photoFile") MultipartFile photoFile,
+            @RequestParam("autoId") Long autoId) {
+        // Establecer el auto asociado
+        Auto auto = autoRepository.findById(autoId).orElse(null);
+        if (auto != null) {
+            matxura.setAuto(auto);
+
+            // Manejar la foto si se proporciona
+            if (!photoFile.isEmpty()) {
+                String newPhotoPath = savePhoto(photoFile, MATXURA_UPLOAD_DIR, "/images/matxurak");
+                matxura.setFotoRuta(newPhotoPath);
+            }
+
+            // Manejar el video si se proporciona
+            if (matxura.getVideoRuta() != null && !matxura.getVideoRuta().isEmpty()) {
+                String videoId = extractYoutubeId(matxura.getVideoRuta());
+                if (videoId != null && !videoId.isEmpty()) {
+                    matxura.setVideoRuta(videoId);
+                }
+            }
+
+            matxuraRepository.save(matxura);
+        }
+        return "redirect:/matxurak?t=" + System.currentTimeMillis();
+    }
+
+    @PostMapping("/matxura/update/{id}")
+    public String updateMatxura(@PathVariable Long id,
+            @ModelAttribute Matxura matxura,
+            @RequestParam("photoFile") MultipartFile photoFile) {
+        Matxura existingMatxura = matxuraRepository.findById(id).orElse(null);
+        if (existingMatxura != null) {
+            existingMatxura.setDeskribapena(matxura.getDeskribapena());
+
+            if (!photoFile.isEmpty()) {
+                deleteExistingPhoto(existingMatxura.getFotoRuta(), MATXURA_UPLOAD_DIR);
+                String newPhotoPath = savePhoto(photoFile, MATXURA_UPLOAD_DIR, "/images/matxurak");
+                existingMatxura.setFotoRuta(newPhotoPath);
+            }
+
+            if (matxura.getVideoRuta() != null && !matxura.getVideoRuta().isEmpty()) {
+                String videoId = extractYoutubeId(matxura.getVideoRuta());
+                if (videoId != null && !videoId.isEmpty()) {
+                    existingMatxura.setVideoRuta(videoId);
+                }
+            }
+
+            matxuraRepository.save(existingMatxura);
+        }
+        return "redirect:/matxurak";
+    }
+
+    @PostMapping("/matxura/delete/{id}")
+    public String deleteMatxura(@PathVariable Long id) {
+        Matxura matxura = matxuraRepository.findById(id).orElse(null);
+        if (matxura != null) {
+            // Eliminar la foto si existe
+            if (matxura.getFotoRuta() != null) {
+                deleteExistingPhoto(matxura.getFotoRuta(), MATXURA_UPLOAD_DIR);
+            }
+            matxuraRepository.deleteById(id);
         }
         return "redirect:/matxurak";
     }
@@ -107,32 +185,6 @@ public class MatxuraController {
         }
 
         return videoId;
-    }
-
-    @PostMapping("/matxura/update/{id}")
-    public String updateMatxura(@PathVariable Long id,
-            @ModelAttribute Matxura matxura,
-            @RequestParam("photoFile") MultipartFile photoFile) {
-        Matxura existingMatxura = matxuraRepository.findById(id).orElse(null);
-        if (existingMatxura != null) {
-            existingMatxura.setDeskribapena(matxura.getDeskribapena());
-
-            if (!photoFile.isEmpty()) {
-                deleteExistingPhoto(existingMatxura.getFotoRuta(), MATXURA_UPLOAD_DIR);
-                String newPhotoPath = savePhoto(photoFile, MATXURA_UPLOAD_DIR, "/images/matxurak");
-                existingMatxura.setFotoRuta(newPhotoPath);
-            }
-
-            if (matxura.getVideoRuta() != null && !matxura.getVideoRuta().isEmpty()) {
-                String videoId = extractYoutubeId(matxura.getVideoRuta());
-                if (videoId != null && !videoId.isEmpty()) {
-                    existingMatxura.setVideoRuta(videoId);
-                }
-            }
-
-            matxuraRepository.save(existingMatxura);
-        }
-        return "redirect:/matxurak";
     }
 
 }
